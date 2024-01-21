@@ -47,7 +47,7 @@
                                     var redirectUrl = selectedSite.url;
                                     document.querySelector('meta[http-equiv="refresh"]').content += redirectUrl;
                                 })
-                                .catch(error => console.error("Error fetching site_cn.json:", error));
+                                .catch(error => console.error("Error fetching sites_glb.json:", error));
                         }
                     })
                     .catch(error => console.error("Error fetching country_code:", error));

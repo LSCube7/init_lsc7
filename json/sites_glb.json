@@ -1,5 +1,5 @@
 {
-    "site_glb": [
+    "sites_glb": [
         {"name":"Blue Archive", "url":"https://bluearchive.nexon.com"},
         {"name":"Honkai Impact 3", "url":"https://honkaiimpact3.hoyoverse.com"},
         {"name":"Tears of Themis", "url":"https://tot.hoyoverse.com"},
