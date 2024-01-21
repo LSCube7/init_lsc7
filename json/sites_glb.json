@@ -1,3 +1,12 @@
 {
-    
+    "site_glb": [
+        {"name":"Blue Archive", "url":"https://bluearchive.nexon.com"},
+        {"name":"Honkai Impact 3", "url":"https://honkaiimpact3.hoyoverse.com"},
+        {"name":"Tears of Themis", "url":"https://tot.hoyoverse.com"},
+        {"name":"Genshin Impact", "url":"https://genshin.hoyoverse.com"},
+        {"name":"Honkai: Star Rail", "url":"https://hsr.hoyoverse.com"},
+        {"name":"Zenless Zone Zero", "url":"https://zenless.hoyoverse.com"},
+        {"name":"HoYoLAB", "url":"https://www.hoyolab.com"},
+        {"name":"HoYoverse", "url":"https://www.hoyoverse.com"}
+    ]
 }

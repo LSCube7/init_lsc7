@@ -2,80 +2,56 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Initiate！</title>
+        <title>Initiate!</title>
+        <meta http-equiv="refresh" content="3;url=">
     </head>
     <body>
         <script>
-            let country_code; // Declare countryCode outside the fetch block
+            document.addEventListener("DOMContentLoaded",function (){
 
-            fetch("https://ipapi.co/json")
-                .then((response) => response.json()) // Fix: Call response.json() instead of response.json
-                .then(function (getIP) {
-                    console.log(getIP.country_code);
-                    country_code = getIP.country_code;
-                    return country_code;
-                })
-                .then(() => {
-                    const num = Math.floor(Math.random() * 8 + 1);
-                    if (country_code === "CN") { // Fix: Use triple equals (===) for strict comparison
-                        switch (num) {
-                            case 1:
-                                window.location = "https://www.benghuai.com";
-                                break;
-                            case 2:
-                                window.location = "https://bh3.mihoyo.com";
-                                break;
-                            case 3:
-                                window.location = "https://wd.mihoyo.com";
-                                break;
-                            case 4:
-                                window.location = "https://ys.mihoyo.com";
-                                break;
-                            case 5:
-                                window.location = "https://sr.mihoyo.com";
-                                break;
-                            case 6:
-                                window.location = "https://zzz.mihoyo.com";
-                                break;
-                            case 7:
-                                window.location = "https://bbs.mihoyo.com";
-                                break;
-                            case 8:
-                                window.location = "https://www.mihoyo.com";
-                                break;
-                            default:
-                                document.write("Error!")
+            
+                var country_code = ""; 
+
+                // Get Country Code from user's IP
+                fetch("https://ipapi.co/country_code")
+                    .then(response => response.text()) 
+                    .then(data => {
+                        country_code = data.trim();
+                        if (country_code === "CN") {
+                            fetch("./json/sites_cn.json")
+                                .then(response => response.json())
+                                .then(siteList => {
+                                    var randomIndex = Math.floor(Math.random() * siteList.sites_cn.length)
+                                    var selectedSite = siteList.sites_cn[randomIndex];
+
+                                    var display = document.createElement("div");
+                                    display.textContent = "天朝人，你好！  " + selectedSite.name + "，启动！"
+                                    document.body.appendChild(display);
+
+                                    var redirectUrl = selectedSite.url;
+                                    document.querySelector('meta[http-equiv="refresh"]').content += redirectUrl;
+                                })
+                                .catch(error => console.error("Error fetching site_cn.json:", error));
+                            }
+                        else {
+                            fetch("./json/sites_glb.json")
+                                .then(response => response.json())
+                                .then(siteList => {
+                                    var randomIndex = Math.floor(Math.random() * siteList.sites_glb.length)
+                                    var selectedSite = siteList.sites_glb[randomIndex];
+
+                                    var display = document.createElement("div");
+                                    display.textContent = "People from " + country_code + ", Hello!  " + selectedSite.name + ", Initiate!"
+                                    document.body.appendChild(display);
+
+                                    var redirectUrl = selectedSite.url;
+                                    document.querySelector('meta[http-equiv="refresh"]').content += redirectUrl;
+                                })
+                                .catch(error => console.error("Error fetching site_cn.json:", error));
                         }
-                    } else {
-                        switch (num) {
-                            case 1:
-                                window.location = "https://bluearchive.nexon.com";
-                                break;
-                            case 2:
-                                window.location = "https://honkaiimpact3.hoyoverse.com";
-                                break;
-                            case 3:
-                                window.location = "https://tot.hoyoverse.com";
-                                break;
-                            case 4:
-                                window.location = "https://genshin.hoyoverse.com";
-                                break;
-                            case 5:
-                                window.location = "https://hsr.hoyoverse.com";
-                                break;
-                            case 6:
-                                window.location = "https://zenless.hoyoverse.com";
-                                break;
-                            case 7:
-                                window.location = "https://www.hoyolab.com";
-                                break;
-                            case 8:
-                                window.location = "https://www.hoyoverse.com";
-                            default:
-                                document.write("Error!")
-                        }
-                    }
-                });
+                    })
+                    .catch(error => console.error("Error fetching country_code:", error));
+                })    
         </script>
     </body>
 </html>
